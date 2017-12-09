@@ -10,9 +10,27 @@ public class Card : MonoBehaviour {
     [SerializeField]
     public int _cType;
     [SerializeField]
+    public int _allowable;
+
+    [SerializeField]
     private int _cardValue;
     [SerializeField]
     private int _trumpValue;
+
+  
+
+    Vector3 positionStart;
+    /* Vector3 position1 = new Vector3(420, 170, 0);
+     Vector3 position2 = new Vector3(420, 260, 0);
+     Vector3 position3 = new Vector3(380, 250, 0);
+     Vector3 position4 = new Vector3(530, 250, 0);*/
+
+    Vector3 position1 = new Vector3(-39, -29, 0);
+     Vector3 position2 = new Vector3(-39, 31, 0);
+     Vector3 position3 = new Vector3(-69, 24, 0);
+     Vector3 position4 = new Vector3(42, 24, 0);
+
+   // public Transform pos1 = new Vector3(420, 170, 0);
 
 
     private bool _initialized = false;
@@ -24,8 +42,10 @@ public class Card : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        positionStart = transform.position;
         _state = 0;
         _manager = GameObject.FindWithTag("Manager");
+       
     }
 
     public void setupGraphics()
@@ -48,11 +68,62 @@ public class Card : MonoBehaviour {
         else if (_state == 1)
             _state = 0;
 
-        this.gameObject.SetActive(false);
-        //this.gameObject.transform{ get};
+        //this.gameObject.SetActive(false);
+
+        
+        moveCard();
+
+
+        
       
 
     }
+
+    void moveCard() {
+        if (_cType == 1)
+        {
+            gameObject.transform.localPosition = position1;
+            
+            this.GetComponent<Button>().interactable = true;
+            this.GetComponent<Button>().enabled = false;
+        }
+
+
+        if (_cType == 2)
+        {
+           gameObject.transform.localPosition = position2;
+            this.GetComponent<Button>().interactable = true;
+            this.GetComponent<Button>().enabled = false;
+        }
+
+        if (_cType == 3)
+        {
+            transform.localPosition = position3;
+            this.GetComponent<Button>().interactable = true;
+            this.GetComponent<Button>().enabled = false;
+        }
+
+        if (_cType == 4)
+        {
+            transform.localPosition = position4;
+            this.GetComponent<Button>().interactable = true;
+            this.GetComponent<Button>().enabled = false;
+        }
+    }
+
+
+    public void setInitialState() {
+        gameObject.transform.position = positionStart;
+    }
+
+
+    public void allowToPerform() {
+        
+    }
+
+
+
+
     // Update is called once per frame
     void Update () {
 	
@@ -82,6 +153,12 @@ public class Card : MonoBehaviour {
     {
         get { return _cType; }
         set { _cType = value; }
+    }
+
+    public int allowable
+    {
+        get { return _allowable; }
+        set { _allowable = value; }
     }
 
     public bool initialized

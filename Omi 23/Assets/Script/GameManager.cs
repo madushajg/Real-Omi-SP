@@ -11,22 +11,22 @@ public class GameManager : MonoBehaviour
     public Button[] p2;
     public Button[] p3;
     public Button[] p4;
-    public Button[] slcdCards;
+    public GameObject[] slcdCards;
     public Canvas roundOver;
 
     public Sprite[] CardFace;
     public Sprite cardBack;
     public GameObject[] Cards;
     private bool _init = false;
-  
+    //private bool roundOver = false;
 
-    private Text MaxText;
-    private Text TrumpText;
+    public Text MaxText;
+    public Text TrumpText;
 
-    private Text trickText1;
-    private Text trickText2;
-    private Text trickText3;
-    private Text trickText4;
+    public Text trickText1;
+    public Text trickText2;
+    public Text trickText3;
+    public Text trickText4;
 
     public Text pointAText;
     public Text pointBText;
@@ -40,21 +40,12 @@ public class GameManager : MonoBehaviour
 
     public int pointsA=0;
     public int pointsB=0;
-
-    List<int> findSt = new List<int>();
+    public int first=0;
 
     // Use this for initialization
     void Start()
     {
-
-        MaxText = GameObject.Find("MaxText").GetComponent<Text>();
-        TrumpText = GameObject.Find("TrumpText").GetComponent<Text>();
-
-
-        trickText1 = GameObject.Find("Player1").transform.FindChild("TrickText").GetComponent<Text>();
-        trickText2 = GameObject.Find("Player2").transform.FindChild("TrickText").GetComponent<Text>();
-        trickText3 = GameObject.Find("Player3").transform.FindChild("TrickText").GetComponent<Text>();
-        trickText4 = GameObject.Find("Player4").transform.FindChild("TrickText").GetComponent<Text>();
+        
     }
 
     public void exit()
@@ -73,12 +64,14 @@ public class GameManager : MonoBehaviour
         }
 
 
-        
+        //if (_tt<8) { 
 
 
         if (Input.GetMouseButtonUp(0))
                checkCards();
-        
+        //  lockCards();
+       
+        //}
 
         
 
@@ -238,103 +231,110 @@ public class GameManager : MonoBehaviour
 
 
 
-    void checkCards()
+  void checkCards()
     {
-        findState();
-
-        List<int> c = new List<int>();
-        int first = 0;
-        int count=-1;
        
-
-
-        
-
-
+        List<int> c = new List<int>();              
+       
         for (int i = 0; i < Cards.Length; i++)
-        {           
-            
-            if (findSt[i]==1)
+        {
+            if (Cards[i].GetComponent<Card>().state == 1)
             {
-                c.Add(i);
-                count++;
-
-                if (c.Count == 1)
-                {
-                    first = i;
-                    lockPeers(first);
-                }
-
-               
-               // slcdCards[i].GetComponent<Card>().cardValue = i;
-                //slcdCards[i].GetComponent<Card>().setupGraphics();
-                
-
-                cardSelected(i);
-            }
+                c.Add(i);                 
+                              
+             }           
         }
 
-
+        if (c.Count == 1)
+        {
+            first = c[0];
+            lockPeers(first);          
+            
+        }        
+        
+        cardSlced();
 
         if (c.Count == 4)
-        {
-            cardComparison(c,first);
+        {            
+            cardComparison(c, first);        
+
+            for (int i = 0; i < 4; i++)
+            {
+                slcdCards[i] = GameObject.Find(Cards[c[i]].GetComponent<Card>().name).gameObject;
+            }
             c.Clear();
-            
-        }                
+            cardWipe();
 
+        }
 
     }
 
 
-
-    void findState() {       
-
-        for (int q=0;q<8;q++) {
-            findSt.Add(GameObject.Find("Player_1").gameObject.GetComponent<Player>().state[q]);
-        }
-
-        for (int q = 8; q < 16; q++)
-        {
-            findSt.Add(GameObject.Find("Player_2").gameObject.GetComponent<Player>().state[q]);
-        }
-
-        for (int q = 16; q < 24; q++)
-        {
-            findSt.Add(GameObject.Find("Player_3").gameObject.GetComponent<Player>().state[q]);
-        }
-
-        for (int q = 24; q < 32; q++)
-        {
-            findSt.Add(GameObject.Find("Player_4").gameObject.GetComponent<Player>().state[q]);
-        }
-
-
-    }
-
-
-
-
-    public void cardSelected(int z)
+    void cardSlced()
     {
+        int p=0;
+
+        for (int t = 0; t < Cards.Length; t++) {
+            if (Cards[t].GetComponent<Card>().state == 1)
+            {
+
+                for (int j = 0; j < Cards.Length; j++)
+                {
+                    if (Cards[j].GetComponent<Card>().cType == Cards[t].GetComponent<Card>().cType)
+                    {
+                        Cards[j].GetComponent<Button>().interactable = false;
+                        p = j;
+                    }
+                }
+            }
+    }
+       // nextCardSet(p);
+
+    }
+
+
+
+    void cardWipe() {
+        for (int j = 0; j < Cards.Length; j++)
+        {
+            if (Cards[j].GetComponent<Card>().state == 2)
+            {
+                foreach (GameObject g in slcdCards)
+                {
+                    g.gameObject.SetActive(false);
+                    g.GetComponent<Card>().setInitialState();
+
+                }
+                Cards[j].GetComponent<Card>().state = 3;
+            }
+        }
+    }
+
+
+    public void nextCardSet(int z)
+    {
+        dissableAll();
+
         int ct = Cards[z].GetComponent<Card>().cType;
 
 
         if (ct == 1) {
-            foreach (Button button in p1)
+            foreach (Button button in p4)
             {
-                button.GetComponent<Button>().interactable = false;
-                //button.gameObject.SetActive(false);
+                if (button.GetComponent<Card>().state == 0)
+                    button.GetComponent<Button>().enabled = true;
+
 
             }
 
         }
 
         else if (ct==2) {
-            foreach (Button button in p2)
+            foreach (Button button in p3)
             {
-                button.GetComponent<Button>().interactable = false;
-                //button.gameObject.SetActive(false);
+                if (button.GetComponent<Card>().state == 0)
+                    button.GetComponent<Button>().enabled = true;
+
 
             }
 
@@ -342,10 +342,11 @@ public class GameManager : MonoBehaviour
 
         else if (ct == 3)
         {
-            foreach (Button button in p3)
+            foreach (Button button in p1)
             {
-                button.GetComponent<Button>().interactable = false;
-                //button.gameObject.SetActive(false);
+                if (button.GetComponent<Card>().state == 0)
+                    button.GetComponent<Button>().enabled = true;
+
 
             }
 
@@ -353,10 +354,11 @@ public class GameManager : MonoBehaviour
 
         else if (ct == 4)
         {
-            foreach (Button button in p4)
+            foreach (Button button in p2)
             {
-                button.GetComponent<Button>().interactable = false;
-                //button.gameObject.SetActive(false);
+                if (button.GetComponent<Card>().state == 0)
+                    button.GetComponent<Button>().enabled = true;
+
 
             }
 
@@ -377,18 +379,17 @@ public class GameManager : MonoBehaviour
         bool putTrump = false;
         int x = 0;
 
-
         for (int i = 0; i < 4; i++)
         {
-            if (GameObject.Find("Player_1").gameObject.GetComponent<Player>().trumpValue[i]>32) 
+            if (Cards[c[i]].GetComponent<Card>().trumpValue > 32)
             {
-                temp[i] = GameObject.Find("Player_1").gameObject.GetComponent<Player>().trumpValue[i];
+                temp[i] = Cards[c[i]].GetComponent<Card>().trumpValue;
                 putTrump = true;
             }
             else {
                 cv = Cards[c[i]].GetComponent<Card>().cardValue;
 
-                if ((fv >= 0 && fv <= 8) && (cv >= 0 && cv <= 8))
+                if ((fv >= 1 && fv <= 8) && (cv >= 1 && cv <= 8))
                     temp[i] = Cards[c[i]].GetComponent<Card>().cardValue;
 
                 else if ((fv >= 9 && fv <= 16) && (cv >= 9 && cv <= 16))
@@ -436,7 +437,7 @@ public class GameManager : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
 
-                if (GameObject.Find("Player_1").gameObject.GetComponent<Player>().trumpValue[c[j]] == maxValue) 
+                if (Cards[c[j]].GetComponent<Card>().trumpValue == maxValue)
                 {
                     cIndex = j;
                 }
@@ -462,28 +463,57 @@ public class GameManager : MonoBehaviour
         {
             _tricksP1++;
             trickText1.text = "Tricks :" + _tricksP1;
-            unlockCards();
+
+            foreach (Button button in p1)
+            {
+                button.GetComponent<Button>().interactable = true;
+
+            }
+
+
+            //unlockCards();
         }
 
         else if (8 <= c[cIndex] && c[cIndex] < 16)
         {
             _tricksP2++;
             trickText2.text = "Tricks :" + _tricksP2;
-            unlockCards();
+
+            foreach (Button button in p2)
+            {
+                button.GetComponent<Button>().interactable = true;
+
+            }
+
+            //unlockCards();
         }
 
         else if (16 <= c[cIndex] && c[cIndex] < 24)
         {
             _tricksP3++;
             trickText3.text = "Tricks :" + _tricksP3;
-            unlockCards();
+
+            foreach (Button button in p3)
+            {
+                button.GetComponent<Button>().interactable = true;
+
+            }
+
+            //unlockCards();
         }
 
         else if (24 <= c[cIndex] && c[cIndex] < 32)
         {
             _tricksP4++;
             trickText4.text = "Tricks :" + _tricksP4;
-            unlockCards();
+            foreach (Button button in p4)
+            {
+                button.GetComponent<Button>().interactable = true;
+
+            }
+
+
+            //unlockCards();
         }
 
         _tt = _tricksP1 + _tricksP2 + _tricksP3 + _tricksP4;
@@ -492,6 +522,18 @@ public class GameManager : MonoBehaviour
             calculatePoints(_tricksP1, _tricksP2, _tricksP3, _tricksP4);
         }
 
+        resetAllowable();
+
+        
+
+    }
+
+
+    void resetAllowable()
+    {
+        for (int k=0;k<Cards.Length;k++) {
+            Cards[k].GetComponent<Card>().allowable = 0;
+        }
     }
 
 
@@ -514,6 +556,32 @@ public class GameManager : MonoBehaviour
         foreach (Button button in p4)
         {
             button.GetComponent<Button>().interactable = true;
+
+        }
+
+
+    }
+
+    void dissableAll()
+    {
+        foreach (Button button in p1)
+        {
+            button.GetComponent<Button>().enabled = false;
+
+        }
+        foreach (Button button in p2)
+        {
+            button.GetComponent<Button>().enabled = false;
+
+        }
+        foreach (Button button in p3)
+        {
+            button.GetComponent<Button>().enabled = false;
+
+        }
+        foreach (Button button in p4)
+        {
+            button.GetComponent<Button>().enabled = false;
 
         }
 
@@ -558,6 +626,7 @@ public class GameManager : MonoBehaviour
         for (int i=0;i<Cards.Length;i++) {
             Cards[i].GetComponent<Card>().cardValue = 0;
             Cards[i].gameObject.SetActive(true);
+            Cards[i].GetComponent<Button>().enabled = true;
             Cards[i].GetComponent<Card>().state = 0;
             Cards[i].GetComponent<Card>().trumpValue = 0;
             Cards[i].GetComponent<Card>().initialized = false;
@@ -649,41 +718,51 @@ public class GameManager : MonoBehaviour
         int val = Cards[i].GetComponent<Card>().cardValue;
 
         for (int x = 0; x < Cards.Length; x++)
-        {
-            Cards[x].GetComponent<Button>().interactable = false;
+        {                        
+
+            if (Cards[x].GetComponent<Card>().state == 0) {
+                    Cards[x].GetComponent<Button>().interactable = false;
+
+                if (1 <= val && val < 9)
+                {
+                    if (Cards[x].GetComponent<Card>().cardValue >= 1 && Cards[x].GetComponent<Card>().cardValue < 9)
+                    {
+                        Cards[x].GetComponent<Button>().interactable = true;
+                        Cards[x].GetComponent<Card>().allowable = 1;
+                    }
+                }
 
 
 
 
-            if (1 <= val && val < 9)
-            {
-                if (Cards[x].GetComponent<Card>().cardValue >= 1 && Cards[x].GetComponent<Card>().cardValue < 9)
+                else if (9 <= val && val < 17)
+                {
+                    if (Cards[x].GetComponent<Card>().cardValue >= 9 && Cards[x].GetComponent<Card>().cardValue < 17)
+                    {
+                        Cards[x].GetComponent<Button>().interactable = true;
+                        Cards[x].GetComponent<Card>().allowable = 1;
+                    }
+                }
+
+
+                else if (17 <= val && val < 25)
+                {
+                    if (Cards[x].GetComponent<Card>().cardValue >= 17 && Cards[x].GetComponent<Card>().cardValue < 25)
+                    {
+                        Cards[x].GetComponent<Button>().interactable = true;
+                        Cards[x].GetComponent<Card>().allowable = 1;
+                    }
+                }
+
+                else if (25 <= val && val < 33)
+                {
+                    if (Cards[x].GetComponent<Card>().cardValue >= 25 && Cards[x].GetComponent<Card>().cardValue < 33) { 
                     Cards[x].GetComponent<Button>().interactable = true;
-            }
+                    Cards[x].GetComponent<Card>().allowable = 1;
+                }
+                }
 
-
-
-
-            else if (9 <= val && val < 17)
-            {
-                if (Cards[x].GetComponent<Card>().cardValue >= 9 && Cards[x].GetComponent<Card>().cardValue < 17)
-                    Cards[x].GetComponent<Button>().interactable = true;
-            }
-
-
-            else if (17 <= val && val < 25)
-            {
-                if (Cards[x].GetComponent<Card>().cardValue >= 17 && Cards[x].GetComponent<Card>().cardValue < 25)
-                    Cards[x].GetComponent<Button>().interactable = true;
-            }
-
-            else if (25 <= val && val < 33)
-            {
-                if (Cards[x].GetComponent<Card>().cardValue >= 25 && Cards[x].GetComponent<Card>().cardValue < 33)
-                    Cards[x].GetComponent<Button>().interactable = true;
-            }
-
-
+        }
         }
 
         noCard();
