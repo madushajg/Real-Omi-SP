@@ -315,8 +315,8 @@ public class GameManager : MonoBehaviour
     {
         dissableAll();
 
-        int ct = Cards[z].GetComponent<Card>().cType;
-
+        // int ct = Cards[z].GetComponent<Card>().cType;
+        int ct = z;
 
         if (ct == 1) {
             foreach (Button button in p4)
@@ -471,7 +471,7 @@ public class GameManager : MonoBehaviour
             }
 
 
-            //unlockCards();
+            enableAll();
         }
 
         else if (8 <= c[cIndex] && c[cIndex] < 16)
@@ -485,7 +485,7 @@ public class GameManager : MonoBehaviour
 
             }
 
-            //unlockCards();
+            enableAll();
         }
 
         else if (16 <= c[cIndex] && c[cIndex] < 24)
@@ -499,7 +499,7 @@ public class GameManager : MonoBehaviour
 
             }
 
-            //unlockCards();
+            enableAll();
         }
 
         else if (24 <= c[cIndex] && c[cIndex] < 32)
@@ -513,7 +513,7 @@ public class GameManager : MonoBehaviour
             }
 
 
-            //unlockCards();
+            enableAll();
         }
 
         _tt = _tricksP1 + _tricksP2 + _tricksP3 + _tricksP4;
@@ -561,6 +561,37 @@ public class GameManager : MonoBehaviour
 
 
     }
+
+
+    void enableAll()
+    {
+        foreach (Button button in p1)
+        {
+            button.GetComponent<Button>().enabled = true;
+
+        }
+        foreach (Button button in p2)
+        {
+            button.GetComponent<Button>().enabled = true;
+
+        }
+        foreach (Button button in p3)
+        {
+            button.GetComponent<Button>().enabled = true;
+
+        }
+        foreach (Button button in p4)
+        {
+            button.GetComponent<Button>().enabled = true;
+
+        }
+
+
+    }
+
+
+
+
 
     void dissableAll()
     {

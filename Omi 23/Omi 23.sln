@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omi 23", "Assembly-CSharp.csproj", "{E852DADC-3FEA-C928-25AA-687B816B0EF4}"
+# Visual Studio 2008
+
+Project("{E9570CCB-F1B6-4793-6A88-91B85BCD7606}") = "Omi 23", "Assembly-CSharp.csproj", "{E852DADC-3FEA-C928-25AA-687B816B0EF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

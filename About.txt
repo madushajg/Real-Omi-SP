@@ -1,1 +1,1 @@
-Up to Card put into centre, Only allow trick won to put next card..
+Up to full round controll

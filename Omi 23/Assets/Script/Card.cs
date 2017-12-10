@@ -73,7 +73,7 @@ public class Card : MonoBehaviour {
         
         moveCard();
 
-
+        allowToPerform();
         
       
 
@@ -118,6 +118,7 @@ public class Card : MonoBehaviour {
 
 
     public void allowToPerform() {
+        _manager.GetComponent<GameManager>().nextCardSet(cType);
         
     }
 
