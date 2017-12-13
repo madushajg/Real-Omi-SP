@@ -19,3 +19,32 @@ G:\Project [Level 2]\Unity Workings\Omi 23\Temp\bin\Debug\UnityEngine.Networking
 G:\Project [Level 2]\Unity Workings\Omi 23\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 G:\Project [Level 2]\Unity Workings\Omi 23\obj\Debug\Assembly-CSharp.dll
 G:\Project [Level 2]\Unity Workings\Omi 23\obj\Debug\Assembly-CSharp.pdb
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Assembly-CSharp.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Assembly-CSharp.pdb
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEditor.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.Analytics.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.HoloLens.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.Networking.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.UI.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.VR.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Mono.Cecil.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Unity.SerializationLogic.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Unity.DataContract.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Unity.UNetWeaver.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Unity.CecilTools.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEditor.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.UI.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.Networking.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.Analytics.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.HoloLens.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\Temp\bin\Debug\UnityEngine.VR.xml
+E:\Unity workings Duplicates\03.13(3)\Omi 23\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+E:\Unity workings Duplicates\03.13(3)\Omi 23\obj\Debug\Assembly-CSharp.dll
+E:\Unity workings Duplicates\03.13(3)\Omi 23\obj\Debug\Assembly-CSharp.pdb

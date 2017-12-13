@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
 
     public int pointsA=0;
     public int pointsB=0;
+
+    public int roundId = 0;
+
     public int first=0;
 
     // Use this for initialization
@@ -80,6 +83,8 @@ public class GameManager : MonoBehaviour
 
     void initializeCards()
     {
+
+
 
         for (int i = 1; i < 33; i++)
         {
@@ -133,12 +138,65 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void askTrump() {
-        foreach (Button button in buttons)
+    void askTrump()
+    {
+        
+
+        roundId++;
+
+        if (roundId % 4 == 1)
         {
-            button.gameObject.SetActive(true);
+
+
+            foreach (Button button in buttons)
+            {
+                button.gameObject.SetActive(true);
+            }
+            buttons[5].gameObject.SetActive(false);
+        }
+        else {
+            buttons[5].gameObject.SetActive(true);
+            StartCoroutine(generateTrump());
+
+        }
+
+    }
+
+
+    IEnumerator generateTrump() {
+        yield return new WaitForSeconds(3);
+
+        int tChoice = 0;
+
+        
+        tChoice = Random.Range(0, 4);
+
+        switch (tChoice)
+        {
+            case (0):
+                trumpHearts();
+                break;
+
+            case (1):
+                trumpSpeades();
+                break;
+
+            case (2):
+                trumpClubs();
+                break;
+
+            case (3):
+                trumpDiamonds();
+                break;
+
+            default:
+                break;
+
+
+
         }
     }
+
     
 
     public Sprite getCardBack()
@@ -255,16 +313,17 @@ public class GameManager : MonoBehaviour
         cardSlced();
 
         if (c.Count == 4)
-        {            
-            cardComparison(c, first);        
+        {
+
+            cardComparison(c, first);
 
             for (int i = 0; i < 4; i++)
             {
                 slcdCards[i] = GameObject.Find(Cards[c[i]].GetComponent<Card>().name).gameObject;
             }
             c.Clear();
-            cardWipe();
-
+            StartCoroutine(cardWipe());
+            
         }
 
     }
@@ -288,23 +347,34 @@ public class GameManager : MonoBehaviour
                 }
             }
     }
-       // nextCardSet(p);
+      
 
     }
 
 
 
-    void cardWipe() {
+    IEnumerator cardWipe() {
+
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (GameObject g in slcdCards)
+        {
+            g.gameObject.SetActive(false);
+            g.GetComponent<Card>().setInitialState();
+
+        }
+
+
         for (int j = 0; j < Cards.Length; j++)
         {
             if (Cards[j].GetComponent<Card>().state == 2)
             {
-                foreach (GameObject g in slcdCards)
+                /*foreach (GameObject g in slcdCards)
                 {
                     g.gameObject.SetActive(false);
                     g.GetComponent<Card>().setInitialState();
 
-                }
+                }*/
                 Cards[j].GetComponent<Card>().state = 3;
             }
         }
@@ -321,9 +391,10 @@ public class GameManager : MonoBehaviour
         if (ct == 1) {
             foreach (Button button in p4)
             {
-                if (button.GetComponent<Card>().state == 0)
-                    button.GetComponent<Button>().enabled = true;
-
+                if (button.GetComponent<Card>().state == 0) { 
+                button.GetComponent<Button>().enabled = true;
+               
+            }
 
             }
 
@@ -332,9 +403,10 @@ public class GameManager : MonoBehaviour
         else if (ct==2) {
             foreach (Button button in p3)
             {
-                if (button.GetComponent<Card>().state == 0)
-                    button.GetComponent<Button>().enabled = true;
-
+                if (button.GetComponent<Card>().state == 0) { 
+                button.GetComponent<Button>().enabled = true;
+                
+            }
 
             }
 
@@ -344,10 +416,11 @@ public class GameManager : MonoBehaviour
         {
             foreach (Button button in p1)
             {
-                if (button.GetComponent<Card>().state == 0)
-                    button.GetComponent<Button>().enabled = true;
+                if (button.GetComponent<Card>().state == 0) { 
+                button.GetComponent<Button>().enabled = true;
+               
 
-
+            }
             }
 
         }
@@ -356,10 +429,11 @@ public class GameManager : MonoBehaviour
         {
             foreach (Button button in p2)
             {
-                if (button.GetComponent<Card>().state == 0)
-                    button.GetComponent<Button>().enabled = true;
+                if (button.GetComponent<Card>().state == 0) { 
+                button.GetComponent<Button>().enabled = true;
+               
 
-
+            }
             }
 
         }
@@ -372,6 +446,8 @@ public class GameManager : MonoBehaviour
 
     void cardComparison(List<int> c,int f)
     {
+        
+
         int[] temp = new int[4];
         int cIndex = 0;
         int fv = Cards[f].GetComponent<Card>().cardValue;
@@ -425,8 +501,9 @@ public class GameManager : MonoBehaviour
                     cIndex = j;
                 }
             }
-            updateTricks(cIndex,c);    
 
+
+            updateTricks(cIndex, c);
             MaxText.text = "Max Card: " + maxValue;
 
 
@@ -454,11 +531,13 @@ public class GameManager : MonoBehaviour
             Cards[c[i]].GetComponent<Card>().state = x;
 
         }
-
+       
     }
 
 
     void updateTricks(int cIndex, List<int> c) {
+        
+
         if (0 <= c[cIndex] && c[cIndex] < 8)
         {
             _tricksP1++;
@@ -598,21 +677,25 @@ public class GameManager : MonoBehaviour
         foreach (Button button in p1)
         {
             button.GetComponent<Button>().enabled = false;
+            
 
         }
         foreach (Button button in p2)
         {
-            button.GetComponent<Button>().enabled = false;
+             button.GetComponent<Button>().enabled = false;
+           
 
         }
         foreach (Button button in p3)
         {
             button.GetComponent<Button>().enabled = false;
+            
 
         }
         foreach (Button button in p4)
         {
             button.GetComponent<Button>().enabled = false;
+            
 
         }
 
