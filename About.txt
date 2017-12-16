@@ -1,1 +1,1 @@
-Up to full round controll
+Single player up to n rounds..(not includes trump controll)
