@@ -11,8 +11,6 @@ public class Card : MonoBehaviour {
     public int _cType;
     [SerializeField]
     public int _allowable;
-    [SerializeField]
-    public int _chance;
 
     [SerializeField]
     private int _cardValue;
@@ -22,13 +20,17 @@ public class Card : MonoBehaviour {
   
 
     Vector3 positionStart;
-   
+    /* Vector3 position1 = new Vector3(420, 170, 0);
+     Vector3 position2 = new Vector3(420, 260, 0);
+     Vector3 position3 = new Vector3(380, 250, 0);
+     Vector3 position4 = new Vector3(530, 250, 0);*/
 
     Vector3 position1 = new Vector3(-39, -29, 0);
      Vector3 position2 = new Vector3(-39, 31, 0);
      Vector3 position3 = new Vector3(-69, 24, 0);
      Vector3 position4 = new Vector3(42, 24, 0);
 
+   // public Transform pos1 = new Vector3(420, 170, 0);
 
 
     private bool _initialized = false;
@@ -59,11 +61,6 @@ public class Card : MonoBehaviour {
                   GetComponent<Image>().sprite = _cardFace;
     }
 
-    public void flip()
-    {
-        GetComponent<Image>().sprite = _cardBack;
-    }
-
     public void chooseCard()
     {
         if (_state == 0)
@@ -71,10 +68,9 @@ public class Card : MonoBehaviour {
         else if (_state == 1)
             _state = 0;
 
-        
-        
+        //this.gameObject.SetActive(false);
 
-        _manager.GetComponent<GameManager>().checkCards(cardValue);
+        
         moveCard();
 
         allowToPerform();
@@ -83,7 +79,7 @@ public class Card : MonoBehaviour {
 
     }
 
-   public void moveCard() {
+    void moveCard() {
         if (_cType == 1)
         {
             gameObject.transform.localPosition = position1;
@@ -164,12 +160,6 @@ public class Card : MonoBehaviour {
     {
         get { return _allowable; }
         set { _allowable = value; }
-    }
-
-    public int chance
-    {
-        get { return _chance; }
-        set { _chance = value; }
     }
 
     public bool initialized
