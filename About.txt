@@ -1,1 +1,1 @@
-Single player up to n rounds..(not includes trump controll)
+Single player all the logics finished..

@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Button[] p4;
     public GameObject[] slcdCards;
     public Canvas roundOver;
+    public Canvas won;
+    public Canvas loss;
+
 
     public Sprite[] CardFace;
     public Sprite cardBack;
@@ -72,6 +75,18 @@ public class GameManager : MonoBehaviour
 
             initializeCards();
         }
+
+
+        if(chanceId==0 && roundId%4==2 && canNow)
+            StartCoroutine(putP4CardFirst());
+
+        if (chanceId == 0 && roundId % 4 == 3 && canNow)
+            StartCoroutine(putP2CardFirst());
+
+        if (chanceId == 0 && roundId % 4 == 0 && canNow)
+            StartCoroutine(putP3CardFirst());
+
+
 
 
         if (c.Count == 1)
@@ -939,10 +954,18 @@ public class GameManager : MonoBehaviour
        
         roundOver.gameObject.SetActive(true);
 
-        pointAText.text = "Team A Points : " + pointsA;
-        pointBText.text = "Team B Points : " + pointsB;
+        pointAText.text = "Your Team Points : " + pointsA;
+        pointBText.text = "Opposite team Points : " + pointsB;
 
-        
+
+        if (pointsA >= 10) {
+            won.gameObject.SetActive(true);
+        }
+
+        if (pointsB >= 10) {
+            loss.gameObject.SetActive(true);
+        }
+
 
     }
 
@@ -967,6 +990,7 @@ public class GameManager : MonoBehaviour
         }
 
         canNow = true;
+        chanceId = 0;
         initializeCards();
         clearTricks();
 
