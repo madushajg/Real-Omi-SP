@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Button[] p4;
     public GameObject[] slcdCards;
     public Canvas roundOver;
+    public Canvas exitCanvas;
     public Canvas won;
     public Canvas loss;
 
@@ -62,12 +64,22 @@ public class GameManager : MonoBehaviour
     }
 
     public void exit()
-    {
+    {        
+        exitCanvas.gameObject.SetActive(true);
 
-        Application.Quit();
     }
 
-    // Update is called once per frame
+    public void resume() {
+        exitCanvas.gameObject.SetActive(false);
+
+    }
+
+    public void exitByBack() {
+        SceneManager.LoadScene("Menu");
+        exitCanvas.gameObject.SetActive(false);
+    }
+
+    // Update is called once per framep
     void Update()
     {
         if (!_init)
@@ -151,7 +163,16 @@ public class GameManager : MonoBehaviour
         }
 
 
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            exitCanvas.gameObject.SetActive(true);            
+            
+        }
+
+
     }
+
+
 
 
     void initializeCards()
@@ -176,12 +197,18 @@ public class GameManager : MonoBehaviour
         }
 
 
-        foreach (GameObject go in Cards) {
-            if (go.GetComponent<Card>().cType == 1)
-                go.GetComponent<Card>().setupGraphics();
-            else if((go.GetComponent<Card>().cType != 1))               
+        for (int i=0;i<4;i++) {
+            Cards[i].GetComponent<Card>().setupGraphics();
+        }
+
+
+        foreach (GameObject go in Cards)
+        {
+            if ((go.GetComponent<Card>().cType != 1))
                 go.GetComponent<Card>().enabled = false;
         }
+
+
 
         if (!_init)
             _init = true;
@@ -194,22 +221,26 @@ public class GameManager : MonoBehaviour
     {
         foreach (Button button in p1)
         {
-            button.GetComponent<Button>().interactable = false;
+            //button.GetComponent<Button>().interactable = false;
+            button.GetComponent<Button>().enabled = false;
 
         }
         foreach (Button button in p2)
         {
             button.GetComponent<Button>().interactable = false;
+            //button.GetComponent<Button>().enabled = false;
 
         }
         foreach (Button button in p3)
         {
             button.GetComponent<Button>().interactable = false;
+            //button.GetComponent<Button>().enabled = false;
 
         }
         foreach (Button button in p4)
         {
             button.GetComponent<Button>().interactable = false;
+            //button.GetComponent<Button>().enabled = false;
 
         }
 
@@ -350,6 +381,11 @@ public class GameManager : MonoBehaviour
         foreach (Button button in buttons)
         {
             button.gameObject.SetActive(false);
+        }
+
+        for (int i = 4; i < 8; i++)
+        {
+            Cards[i].GetComponent<Card>().setupGraphics();
         }
     }
 
@@ -869,6 +905,7 @@ public class GameManager : MonoBehaviour
     void unlockCards() {
         foreach (Button button in p1)
         {
+            button.GetComponent<Button>().enabled = true;
             button.GetComponent<Button>().interactable = true;
             
         }
@@ -942,14 +979,14 @@ public class GameManager : MonoBehaviour
         if ((p1+p2)>4) {
             if ((p1 + p2) == 8)
                 pointsA = pointsA + 3;
-
-            pointsA = pointsA + 2;
+            else
+                pointsA = pointsA + 2;
         }
         else if((p3 + p4) >4) {
             if ((p3 + p4) == 8)
                 pointsB = pointsB + 3;
-
-            pointsB = pointsB + 2;
+            else
+                pointsB = pointsB + 2;
         }
        
         roundOver.gameObject.SetActive(true);

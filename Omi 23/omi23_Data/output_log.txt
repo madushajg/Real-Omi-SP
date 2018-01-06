@@ -1,0 +1,71 @@
+Initialize engine version: 5.4.1f1 (649f48bbbf0f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 5500 (ID=0x1616)
+    Vendor:   Intel
+    VRAM:     3839 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.071 seconds
+Platform assembly: G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: G:\Project [Level 2]\Unity Workings\Omi 23\omi23_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.752020 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.692863 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 624.
+Total: 0.544787 ms (FindLiveObjects: 0.038028 ms CreateObjectMapping: 0.031619 ms MarkObjects: 0.469585 ms  DeleteObjects: 0.004700 ms)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[System.Int32].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at GameManager+<putP3Card>c__Iterator2.MoveNext () [0x00000] in <filename unknown>:0 
+  at UnityEngine.SetupCoroutine.InvokeMoveNext (IEnumerator enumerator, IntPtr returnValueAddress) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[System.Int32].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at GameManager+<putP2Card>c__Iterator1.MoveNext () [0x00000] in <filename unknown>:0 
+  at UnityEngine.SetupCoroutine.InvokeMoveNext (IEnumerator enumerator, IntPtr returnValueAddress) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.657163 ms
+
+Unloading 75 unused Assets to reduce memory usage. Loaded Objects now: 198.
+Total: 0.243124 ms (FindLiveObjects: 0.023500 ms CreateObjectMapping: 0.013673 ms MarkObjects: 0.174332 ms  DeleteObjects: 0.030764 ms)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 1f4c -> priority: 1 
