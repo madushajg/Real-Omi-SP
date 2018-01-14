@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
 
         if (c.Count == 4)
         {
-
+            lockAfterFull();
             cardComparison(first);
 
             for (int i = 0; i < 4; i++)
@@ -202,6 +202,15 @@ public class GameManager : MonoBehaviour
         }
 
 
+        for (int i = 4; i < 8; i++)
+        {
+            p1[i].gameObject.SetActive(false);
+            p2[i].gameObject.SetActive(false);
+            p3[i].gameObject.SetActive(false);
+            p4[i].gameObject.SetActive(false);
+        }
+
+
         foreach (GameObject go in Cards)
         {
             if ((go.GetComponent<Card>().cType != 1))
@@ -221,26 +230,48 @@ public class GameManager : MonoBehaviour
     {
         foreach (Button button in p1)
         {
-            //button.GetComponent<Button>().interactable = false;
             button.GetComponent<Button>().enabled = false;
 
         }
         foreach (Button button in p2)
         {
-            button.GetComponent<Button>().interactable = false;
-            //button.GetComponent<Button>().enabled = false;
+            button.GetComponent<Button>().interactable = false;            
 
         }
         foreach (Button button in p3)
         {
-            button.GetComponent<Button>().interactable = false;
-            //button.GetComponent<Button>().enabled = false;
+            button.GetComponent<Button>().interactable = false;          
 
         }
         foreach (Button button in p4)
         {
-            button.GetComponent<Button>().interactable = false;
-            //button.GetComponent<Button>().enabled = false;
+            button.GetComponent<Button>().interactable = false;            
+
+        }
+
+    }
+
+
+    void lockAfterFull()
+    {
+        foreach (Button button in p1)
+        {
+            button.GetComponent<Button>().enabled = false;
+
+        }
+        foreach (Button button in p2)
+        {
+            button.GetComponent<Button>().enabled = false;
+
+        }
+        foreach (Button button in p3)
+        {
+            button.GetComponent<Button>().enabled = false;
+
+        }
+        foreach (Button button in p4)
+        {
+            button.GetComponent<Button>().enabled = false;
 
         }
 
@@ -385,8 +416,19 @@ public class GameManager : MonoBehaviour
 
         for (int i = 4; i < 8; i++)
         {
+            
             Cards[i].GetComponent<Card>().setupGraphics();
+            p1[i].gameObject.SetActive(true);
+            p2[i].gameObject.SetActive(true);
+            p3[i].gameObject.SetActive(true);
+            p4[i].gameObject.SetActive(true);
         }
+
+
+        /*for (int i = 0; i < 4; i++)
+        {
+            Cards[i].GetComponent<Card>().setupGraphics();
+        }*/
     }
 
 

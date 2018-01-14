@@ -24,10 +24,10 @@ public class Card : MonoBehaviour {
     Vector3 positionStart;
    
 
-    Vector3 position1 = new Vector3(-39, -29, 0);
-     Vector3 position2 = new Vector3(-39, 31, 0);
+    Vector3 position1 = new Vector3(-39, -33, 0);
+     Vector3 position2 = new Vector3(-39, 29, 0);
      Vector3 position3 = new Vector3(-69, 24, 0);
-     Vector3 position4 = new Vector3(42, 24, 0);
+     Vector3 position4 = new Vector3(49, 24, 0);
 
 
 
